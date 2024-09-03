@@ -16,20 +16,24 @@ namespace ApiProgra3.Controllers
         [HttpGet]
         public List<Product> Get()
         {
-            return new List<Product>();
+            return productsApi.getAll();
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public Product Get(int id)
-        {
-            return productsApi.Create("rusca",25);
-        }
+        /*       // GET api/<ValuesController>/5
+            [HttpGet("{id}")]
+         public Product Get(int id)
+            {
+            //    return productsApi.Create("rusca",25);
+            }
+
+            */
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Product Post(string name,int price)
         {
+            return productsApi.Create(name, price);
+
         }
 
         // PUT api/<ValuesController>/5

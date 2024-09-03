@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace Negocio
 {
     public class ProductsApi
     {
+        
         public List<Product> getAll()
         {
-            return new List<Product>();
+            List<Product> info = Datos.GetAll();
+            return info;
         }
         public Product Create(string Name, int Price)
         {
-            Random random = new Random();
-            int randomId = random.Next(0, 100);
-            string name = Name;
-            int price = Price;
-            Product product = new Product(price, name, randomId);
+            Product product = Datos.Create(Name,Price); 
 
             return product;
         }
