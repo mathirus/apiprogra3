@@ -27,5 +27,11 @@ namespace Negocio
 
             return product;
         }
+
+       public static Product FindById(int Id)
+        {   
+            return productos.FirstOrDefault(p => p.Id == Id);
+
+        }
     }
 }
