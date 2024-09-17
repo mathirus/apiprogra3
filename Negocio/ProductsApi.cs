@@ -24,21 +24,26 @@ namespace Negocio
             return product;
         }
 
-        /*
+        
         public Product GetById(int id)
         {
-            return new Product();
-        }
+            Product product = Datos.GetById(id);
 
-        public Product Update(int id)
+            return product;
+        }
+        
+        public Product Update(int id, string Name, int Price)
         {
-            return new Product();
-        }
+            Product product = Datos.Update(id, Name, Price);
 
+            return product;
+        }
+        
+        /*
         public Product Delete(int id)
         {
             return new Product();
-        }
-        */
+        }*/
+        
     }
 }

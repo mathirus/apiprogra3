@@ -28,10 +28,29 @@ namespace Negocio
             return product;
         }
 
-       public static Product FindById(int Id)
-        {   
-            return productos.FirstOrDefault(p => p.Id == Id);
+       public static Product GetById(int Id)
+       {
+            Product product =  Datos.FindById(Id);
+            return product;
+       }
 
+        public static Product? Update(int Id, string Name, int Price)
+        {
+            Product product = Datos.FindById(Id); product.Name = Name;
+            if (product == null)
+            {
+                return null;
+            }
+
+            product.Name = Name;
+            product.Price = Price;    
+            return product;
         }
+
+        private static Product? FindById(int Id)
+        {
+            return productos.FirstOrDefault(p => p.Id == Id);
+        }
+
     }
 }

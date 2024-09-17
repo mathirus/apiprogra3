@@ -19,27 +19,39 @@ namespace ApiProgra3.Controllers
             return productsApi.getAll();
         }
 
-        /*       // GET api/<ValuesController>/5
-            [HttpGet("{id}")]
-         public Product Get(int id)
+        // GET api/<ValuesController>/5
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Product product = productsApi.GetById(id);
+            if (product == null)
             {
-            //    return productsApi.Create("rusca",25);
+                return NotFound();
             }
+            return Ok(product);
+        }
 
-            */
+
 
         // POST api/<ValuesController>
         [HttpPost]
         public Product Post(string name,int price)
         {
+            
             return productsApi.Create(name, price);
 
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, string name, int price)
         {
+            Product product = productsApi.Update(id,name,price);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
         }
 
         // DELETE api/<ValuesController>/5
