@@ -46,6 +46,17 @@ namespace Negocio
             product.Price = Price;    
             return product;
         }
+        public static bool Delete(int Id)
+        {
+            Product? product = FindById(Id);
+            if (product == null)
+            {
+                return false; // Producto no encontrado
+            }
+
+            productos.Remove(product);
+            return true; // Producto eliminado
+        }
 
         private static Product? FindById(int Id)
         {

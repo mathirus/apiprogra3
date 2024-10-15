@@ -38,12 +38,13 @@ namespace Negocio
 
             return product;
         }
-        
-        /*
-        public Product Delete(int id)
+
+
+        public bool Delete(int id)
         {
-            return new Product();
-        }*/
-        
+            return Datos.Delete(id);
+        }
+
+
     }
 }
