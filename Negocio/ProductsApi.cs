@@ -14,7 +14,8 @@ namespace Negocio
         
         public List<Product> getAll()
         {
-            List<Product> info = Datos.GetAll();
+            Datos informacion = new Datos();
+            List<Product> info = informacion.GetAll();
             return info;
         }
         public Product Create(string Name, int Price)

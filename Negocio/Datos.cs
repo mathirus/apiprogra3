@@ -1,27 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using MySql.Data.MySqlClient;
+using Dapper;
+
 
 namespace Negocio
 {
     public class Datos
     {
+
+        public string myConnectionString = "Server=sql10.freemysqlhosting.net;Database=sql10741376;Uid=sql10741376;Pwd=vqRiz5UenI;";
+
         public static List<Product> productos = new List<Product>();
 
-        public static List<Product> GetAll()
+        public List<Product> GetAll()
         {
+            List<Product> productos = new List<Product>();
+
+            using (MySqlConnection conn = new MySqlConnection(myConnectionString))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM Products";
+                productos = conn.Query<Product>(sql).ToList();
+            }
+                        
             return productos;
         }
+
 
         public static Product Create(string Name, int Price)
         {
             Random random = new Random();
             int randomId = random.Next(0, 100);
             string name = Name;
-            int price = Price;
-            Product product = new Product(price, name, randomId);
+            string description = Name;
+            string category = Name;
+            decimal price = Price;
+            Product product = new Product(randomId, name, description, category , price);
 
             productos.Add(product);
 
@@ -34,15 +54,15 @@ namespace Negocio
             return product;
        }
 
-        public static Product? Update(int Id, string Name, int Price)
+        public static Product? Update(int Id, string Title, int Price)
         {
-            Product product = Datos.FindById(Id); product.Name = Name;
+            Product product = Datos.FindById(Id); product.Title = Title;
             if (product == null)
             {
                 return null;
             }
 
-            product.Name = Name;
+            product.Title = Title;
             product.Price = Price;    
             return product;
         }
