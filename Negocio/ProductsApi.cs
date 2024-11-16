@@ -1,51 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-
-namespace Negocio
+﻿namespace Negocio
 {
     public class ProductsApi
     {
-        
+        private Datos datos = new Datos();
+
         public List<Product> getAll()
         {
-            Datos informacion = new Datos();
-            List<Product> info = informacion.GetAll();
-            return info;
+            return datos.GetAll();
         }
+
         public Product Create(string Name, int Price)
         {
-            Product product = Datos.Create(Name,Price); 
-
-            return product;
+            return datos.Create(Name, Price);
         }
 
-        
         public Product GetById(int id)
         {
-            Product product = Datos.GetById(id);
-
-            return product;
+            return datos.GetById(id);
         }
-        
+
         public Product Update(int id, string Name, int Price)
         {
-            Product product = Datos.Update(id, Name, Price);
-
-            return product;
+            return datos.Update(id, Name, Price);
         }
-
 
         public bool Delete(int id)
         {
-            return Datos.Delete(id);
+            return datos.Delete(id);
         }
-
-
     }
 }

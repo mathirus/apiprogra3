@@ -22,3 +22,16 @@ C:\Users\LN\Downloads\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.dll
 C:\Users\LN\Downloads\apiprogra3\Negocio\obj\Debug\net7.0\refint\Negocio.dll
 C:\Users\LN\Downloads\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.pdb
 C:\Users\LN\Downloads\apiprogra3\Negocio\obj\Debug\net7.0\ref\Negocio.dll
+C:\Users\mathi\proyectos\apiprogra3\Negocio\bin\Debug\net7.0\Negocio.deps.json
+C:\Users\mathi\proyectos\apiprogra3\Negocio\bin\Debug\net7.0\Negocio.dll
+C:\Users\mathi\proyectos\apiprogra3\Negocio\bin\Debug\net7.0\Negocio.pdb
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.csproj.AssemblyReference.cache
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.AssemblyInfoInputs.cache
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.AssemblyInfo.cs
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.sourcelink.json
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.dll
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\refint\Negocio.dll
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\Negocio.pdb
+C:\Users\mathi\proyectos\apiprogra3\Negocio\obj\Debug\net7.0\ref\Negocio.dll

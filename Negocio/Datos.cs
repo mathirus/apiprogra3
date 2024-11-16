@@ -1,87 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using MySql.Data.MySqlClient;
+using System.Linq;
 using Dapper;
-
+using MySql.Data.MySqlClient;
 
 namespace Negocio
 {
     public class Datos
     {
-
-        public string myConnectionString = "Server=sql10.freemysqlhosting.net;Database=sql10741376;Uid=sql10741376;Pwd=vqRiz5UenI;";
-
-        public static List<Product> productos = new List<Product>();
+        public string myConnectionString = "Server=db4free.net;Database=lasnieves110424;Uid=lasnieves110424;Pwd=lasnieves110424";
 
         public List<Product> GetAll()
         {
-            List<Product> productos = new List<Product>();
-
             using (MySqlConnection conn = new MySqlConnection(myConnectionString))
             {
                 conn.Open();
                 string sql = "SELECT * FROM Products";
-                productos = conn.Query<Product>(sql).ToList();
+                var productos = conn.Query<Product>(sql).ToList();
+                return productos;
             }
-                        
-            return productos;
         }
 
-
-        public static Product Create(string Name, int Price)
+        public Product Create(string Name, int Price)
         {
-            Random random = new Random();
-            int randomId = random.Next(0, 100);
-            string name = Name;
-            string description = Name;
-            string category = Name;
-            decimal price = Price;
-            Product product = new Product(randomId, name, description, category , price);
-
-            productos.Add(product);
-
-            return product;
-        }
-
-       public static Product GetById(int Id)
-       {
-            Product product =  Datos.FindById(Id);
-            return product;
-       }
-
-        public static Product? Update(int Id, string Title, int Price)
-        {
-            Product product = Datos.FindById(Id); product.Title = Title;
-            if (product == null)
+            using (MySqlConnection conn = new MySqlConnection(myConnectionString))
             {
-                return null;
-            }
+                conn.Open();
+                string sql = @"INSERT INTO Products (Title, Description, Category, Price) 
+                               VALUES (@Title, @Description, @Category, @Price);
+                               SELECT LAST_INSERT_ID();";
+                var parameters = new
+                {
+                    Title = Name,
+                    Description = Name,
+                    Category = Name,
+                    Price = Price
+                };
 
-            product.Title = Title;
-            product.Price = Price;    
-            return product;
+                int newId = conn.QuerySingle<int>(sql, parameters);
+
+                // Obtener el producto recién creado
+                string selectSql = "SELECT * FROM Products WHERE Id = @Id";
+                var product = conn.QuerySingle<Product>(selectSql, new { Id = newId });
+
+                return product;
+            }
         }
-        public static bool Delete(int Id)
+
+        public Product GetById(int Id)
         {
-            Product? product = FindById(Id);
-            if (product == null)
+            using (MySqlConnection conn = new MySqlConnection(myConnectionString))
             {
-                return false; // Producto no encontrado
+                conn.Open();
+                string sql = "SELECT * FROM Products WHERE Id = @Id";
+                var product = conn.QueryFirstOrDefault<Product>(sql, new { Id });
+
+                return product;
             }
-
-            productos.Remove(product);
-            return true; // Producto eliminado
         }
 
-        private static Product? FindById(int Id)
+        public Product Update(int Id, string Title, int Price)
         {
-            return productos.FirstOrDefault(p => p.Id == Id);
+            using (MySqlConnection conn = new MySqlConnection(myConnectionString))
+            {
+                conn.Open();
+                string sql = @"UPDATE Products 
+                               SET Title = @Title, Price = @Price 
+                               WHERE Id = @Id";
+                var parameters = new
+                {
+                    Id,
+                    Title,
+                    Price
+                };
+
+                int rowsAffected = conn.Execute(sql, parameters);
+
+                if (rowsAffected == 0)
+                {
+                    return null; // Producto no encontrado
+                }
+
+                // Obtener el producto actualizado
+                string selectSql = "SELECT * FROM Products WHERE Id = @Id";
+                var product = conn.QueryFirstOrDefault<Product>(selectSql, new { Id });
+
+                return product;
+            }
         }
 
+        public bool Delete(int Id)
+        {
+            using (MySqlConnection conn = new MySqlConnection(myConnectionString))
+            {
+                conn.Open();
+                string sql = "DELETE FROM Products WHERE Id = @Id";
+                int rowsAffected = conn.Execute(sql, new { Id });
+
+                return rowsAffected > 0;
+            }
+        }
     }
 }
